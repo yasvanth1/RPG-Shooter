@@ -63,6 +63,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
+    <None Include="Content\Player\player.xnb" />
+    <None Include="Content\Player\playerDown.xnb" />
+    <None Include="Content\Player\playerLeft.xnb" />
+    <None Include="Content\Player\playerRight.xnb" />
+    <None Include="Content\Player\playerUp.xnb" />
+    <None Include="Content\Obstacles\bush.xnb" />
+    <None Include="Content\Obstacles\tree.xnb" />
+    <None Include="Content\Misc\bullet.xnb" />
+    <None Include="Content\Misc\heart.xnb" />
+    <None Include="Content\Enemies\eyeEnemy.xnb" />
+    <None Include="Content\Enemies\snakeEnemy.xnb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
