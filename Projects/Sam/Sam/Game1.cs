@@ -33,6 +33,9 @@ namespace Sam.MacOS
         Texture2D bullet_Sprite;
         Texture2D heart_Sprite;
 
+
+        Player player = new Player();
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -92,8 +95,11 @@ namespace Sam.MacOS
         {
             graphics.GraphicsDevice.Clear(Color.ForestGreen);
 
-            //TODO: Add your drawing code here
+            spriteBatch.Begin();
 
+            spriteBatch.Draw(player_Sprite, player.Position,Color.White);
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
