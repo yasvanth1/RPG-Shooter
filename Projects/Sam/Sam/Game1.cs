@@ -6,9 +6,18 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Sam.MacOS
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+
+    enum Dir{
+
+        Down,
+        Up,
+        Left,
+        Right,
+
+    }
+
+
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -20,7 +29,7 @@ namespace Sam.MacOS
         Texture2D player_Down;
         Texture2D player_Up;
         Texture2D player_Right;
-        Texture2D Player_Left;
+        Texture2D player_Left;
         //Loading the assets into my code
         //These are also the different sprite sheets for the player animation
         //different frames of him walking
@@ -64,7 +73,7 @@ namespace Sam.MacOS
             player_Down = Content.Load<Texture2D>("Player/playerDown");
             player_Up = Content.Load<Texture2D>("Player/playerUp");
             player_Right = Content.Load<Texture2D>("Player/playerRight");
-            Player_Left = Content.Load<Texture2D>("Player/playerLeft");
+            player_Left = Content.Load<Texture2D>("Player/playerLeft");
 
             eyeEnemy_Sprite = Content.Load<Texture2D>("Enemies/eyeEnemy");
             snakeEnemy_Sprite = Content.Load<Texture2D>("Enemies/snakeEnemy");
@@ -75,6 +84,14 @@ namespace Sam.MacOS
             heart_Sprite = Content.Load<Texture2D>("Misc/heart");
 
             //All assets are loaded here
+
+            player.animations[0] = new AnimatedSprite(player_Down, 1, 4);
+            player.animations[1] = new AnimatedSprite(player_Up, 1, 4);
+            player.animations[2] = new AnimatedSprite(player_Left, 1, 4);
+            player.animations[3] = new AnimatedSprite(player_Right, 1, 4);
+
+
+
         }
 
     
@@ -85,7 +102,7 @@ namespace Sam.MacOS
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -95,9 +112,9 @@ namespace Sam.MacOS
         {
             graphics.GraphicsDevice.Clear(Color.ForestGreen);
 
-            spriteBatch.Begin();
+            player.anim.Draw(spriteBatch, player.Position);
 
-            spriteBatch.Draw(player_Sprite, player.Position,Color.White);
+            spriteBatch.Begin();
 
             spriteBatch.End();
             base.Draw(gameTime);
