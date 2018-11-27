@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -21,7 +19,7 @@ namespace Sam
         private int speed = 200;
         private Dir direction = Dir.Down;
         private bool isMoving = false;
-
+        private KeyboardState kStateOld = Keyboard.GetState();
 
         public AnimatedSprite anim;
         public AnimatedSprite[] animations = new AnimatedSprite[4];  // creating a array that stores animated sprite objects.
@@ -81,20 +79,18 @@ namespace Sam
 
             // Players direction will be updated depending on what key is pressed down.
 
-            if (kState.IsKeyDown(Keys.Right))
-            {
+            if (kState.IsKeyDown(Keys.Right)){
                 direction = Dir.Right;
                 isMoving = true;
             }
 
-            if (kState.IsKeyDown(Keys.Left))
-            {
+            if (kState.IsKeyDown(Keys.Left)){
                 direction = Dir.Left;
                 isMoving = true;
             }
 
             if (kState.IsKeyDown(Keys.Up))
-            {
+{
                 direction = Dir.Up;
                 isMoving = true;
             }
@@ -106,15 +102,13 @@ namespace Sam
             }
 
 
-            if (isMoving == true)
-            {
+            if (isMoving){
                 switch (direction)
                 {
 
                     case Dir.Right:
                         position.X += speed * dt;
                         break;
-
 
                     case Dir.Left:
                         position.X -= speed * dt;      // to move left we subtract speed + dt
@@ -135,6 +129,11 @@ namespace Sam
             }
 
 
+            if (kState.IsKeyDown(Keys.Space)&& kStateOld.IsKeyUp(Keys.Space)){
+                Projectile.projectiles.Add(new Projectile(position,direction));
+            }
+
+            kStateOld = kState;
         }
 
     }
