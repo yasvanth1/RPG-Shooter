@@ -19,9 +19,9 @@ namespace Sam
         private int speed = 200;
         private Dir direction = Dir.Down;
         private bool isMoving = false;
-        private KeyboardState kStateOld = Keyboard.GetState();
+        private KeyboardState kStateOld = Keyboard.GetState(); // this stores the previous frames keyboard state.
 
-        public AnimatedSprite anim;
+        public AnimatedSprite anim; 
         public AnimatedSprite[] animations = new AnimatedSprite[4];  // creating a array that stores animated sprite objects.
 
 

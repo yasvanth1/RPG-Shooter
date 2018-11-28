@@ -90,6 +90,9 @@ namespace Sam.MacOS
             player.animations[2] = new AnimatedSprite(player_Left, 1, 4);
             player.animations[3] = new AnimatedSprite(player_Right, 1, 4);
 
+            Enemy.enemies.Add(new Snake(new Vector2(100, 400)));
+            Enemy.enemies.Add(new Eye(new Vector2(300, 450)));
+
 
 
         }
@@ -107,6 +110,12 @@ namespace Sam.MacOS
             foreach (Projectile proj in Projectile.projectiles ){
                 proj.Update(gameTime);   // looks at the current projectile in the projectiles list.
             }
+
+            foreach (Enemy en in Enemy.enemies){
+                 en.Update(gameTime, player.Position);
+            }
+
+
             base.Update(gameTime);
         }
 
@@ -118,6 +127,19 @@ namespace Sam.MacOS
             player.anim.Draw(spriteBatch, new Vector2(player.Position.X - 48, player.Position.Y -48));
 
             spriteBatch.Begin();
+
+            foreach (Enemy en in Enemy.enemies){
+                Texture2D spriteToDraw;
+
+
+                if (en.GetType() == typeof(Snake)){
+                    spriteToDraw = snakeEnemy_Sprite;
+                } else {
+                    spriteToDraw = eyeEnemy_Sprite;
+                }
+                spriteBatch.Draw(spriteToDraw, en.Position,Color.White);
+            }
+
 
             foreach (Projectile proj in Projectile.projectiles){
                 spriteBatch.Draw(bullet_Sprite, new Vector2(proj.Position.X-proj.Radius, proj.Position.Y-proj.Radius), Color.White); // creating a vector so bullets are fired from the center of player.
