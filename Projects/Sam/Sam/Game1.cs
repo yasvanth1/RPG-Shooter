@@ -116,6 +116,17 @@ namespace Sam.MacOS
             }
 
 
+            foreach (Projectile proj in Projectile.projectiles){   // If this is all true then there 
+                foreach (Enemy en in Enemy.enemies){                // has been a collison between the current proj and Enemy
+                    int sum = proj.Radius + en.Radius;
+                    if (Vector2.Distance(proj.Position, en.Position) < sum){   // if that's the case the destroy the projectile
+                                                                                // so it does't go through the enemy.
+
+                    }
+                }
+            }
+           
+                    
             base.Update(gameTime);
         }
 
@@ -130,14 +141,17 @@ namespace Sam.MacOS
 
             foreach (Enemy en in Enemy.enemies){
                 Texture2D spriteToDraw;
-
+                int rad;
 
                 if (en.GetType() == typeof(Snake)){
                     spriteToDraw = snakeEnemy_Sprite;
+                    rad = 50;
+
                 } else {
                     spriteToDraw = eyeEnemy_Sprite;
+                    rad = 73;
                 }
-                spriteBatch.Draw(spriteToDraw, en.Position,Color.White);
+                spriteBatch.Draw(spriteToDraw, new Vector2(en.Position.X - rad, en.Position.Y - rad),Color.White); // makes enemy follow from center of sprite.
             }
 
 

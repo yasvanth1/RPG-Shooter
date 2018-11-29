@@ -60,9 +60,12 @@ namespace Sam
         public void Update(GameTime gameTime, Vector2 playerPos)
         {
 
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             Vector2 moveDir = playerPos - position; // points from the enemy to the direction of the player
             moveDir.Normalize();
-            position += moveDir; //position has x&y values of enemies and moveDir has the x&y values pointing towards the player
+            position += moveDir * speed* dt; //position has x&y values of enemies and moveDir has the x&y values pointing towards the player
+                                             // * dt will protect it from any frame rate drops or increases
         }
     }
 
@@ -77,6 +80,8 @@ namespace Sam
         public Snake(Vector2 newPos) : base(newPos)
         {  // gets the newPos variable and passes it to the base contructor.
 
+            speed = 160;
+            radius = 42;
         }
 
     }
@@ -86,6 +91,8 @@ namespace Sam
 
         public Eye(Vector2 newPos) : base(newPos)
         {
+            speed = 90;
+            radius = 45;
 
         }
     }
