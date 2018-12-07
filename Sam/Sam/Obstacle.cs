@@ -38,19 +38,41 @@ namespace Sam
         {
             position = newPos;      // these are all the parents 
         }
+
+        public static bool didCollide(Vector2 otherPos, int otherRad)
+        {
+            foreach (Obstacle o in Obstacle.obstacles) //collison testing with obstacles
+            {
+                int sum = o.Radius + otherRad;
+                if (Vector2.Distance(o.Position, otherPos) < sum)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
+
+
+
+
+
 
         class Tree : Obstacle //child
         {
             public Tree(Vector2 newPos) : base(newPos)
-            {radius = 42;}
+            {radius = 42;
+            }
         }
 
 
         class Bush : Obstacle
         {
             public Bush(Vector2 newPos) : base(newPos) 
-            {radius = 56;}
+            {radius = 56;
+            }
         }
 
 

@@ -132,23 +132,43 @@ namespace Sam
 
             if (isMoving)
             {
+
+                Vector2 tempPos = position;
+
                 switch (direction)
                 {
 
                     case Dir.Right:
-                        position.X += speed * dt;
+                        tempPos.X += speed * dt;                    //if this is not true then move player
+                        if (!Obstacle.didCollide(tempPos, radius)) // takes the next position the player will be, and tests to see if it collides with an obstacle
+                        {
+                            position.X += speed * dt;
+                        }
                         break;
 
                     case Dir.Left:
-                        position.X -= speed * dt;      // to move left we subtract speed + dt
+                        tempPos.X -= speed * dt;
+                        if (!Obstacle.didCollide(tempPos, radius))// to move left we subtract speed + dt
+                        {
+                            position.X -= speed * dt;
+                        }
+                             
                         break;
 
                     case Dir.Down:
-                        position.Y += speed * dt;
+                        tempPos.Y += speed * dt;
+                        if (!Obstacle.didCollide(tempPos, radius))
+                        {
+                            position.Y += speed * dt;
+                        }
                         break;
 
                     case Dir.Up:
-                        position.Y -= speed * dt;
+                        tempPos.Y -= speed * dt;
+                        if (!Obstacle.didCollide(tempPos, radius))
+                        {
+                            position.Y -= speed * dt; //WILL only move plyer when thee is no obstacles in the direction
+                        }
                         break;
 
                     default:
