@@ -64,8 +64,15 @@ namespace Sam
 
             Vector2 moveDir = playerPos - position; // points from the enemy to the direction of the player
             moveDir.Normalize();
-            position += moveDir * speed * dt; //position has x&y values of enemies and moveDir has the x&y values pointing towards the player
+
+            Vector2 tempPos = position;
+              tempPos += moveDir * speed * dt; //position has x&y values of enemies and moveDir has the x&y values pointing towards the player
                                               // * dt will protect it from any frame rate drops or increases
+
+            if (!Obstacle.didCollide(tempPos, Radius)) //enemies will only move to the next step if its not an obstacle
+            {
+                position += moveDir * speed * dt;
+            }
         }
     }
 

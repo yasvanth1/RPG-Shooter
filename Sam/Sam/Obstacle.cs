@@ -16,16 +16,23 @@ namespace Sam
 
         protected Vector2 position; //every object will have a position
         protected int radius; //they're all gonna have a hit box that you can walk into
+        protected Vector2 hitPos;
+
+
         public static List<Obstacle> obstacles = new List<Obstacle>(); // we use this list to store all the obstacles in before I can spawn them
 
 
+        public Vector2 HitPos
+        {
+            get { return hitPos; }
+
+        }
 
 
         public Vector2 Position
         {
             get { return position; }
         }
-
 
 
         public int Radius
@@ -44,7 +51,7 @@ namespace Sam
             foreach (Obstacle o in Obstacle.obstacles) //collison testing with obstacles
             {
                 int sum = o.Radius + otherRad;
-                if (Vector2.Distance(o.Position, otherPos) < sum)
+                if (Vector2.Distance(o.HitPos, otherPos) < sum)
                 {
                     return true;
                 }
@@ -63,7 +70,8 @@ namespace Sam
         class Tree : Obstacle //child
         {
             public Tree(Vector2 newPos) : base(newPos)
-            {radius = 42;
+            {radius = 20;
+            hitPos = new Vector2(position.X + 64, position.Y + 150);
             }
         }
 
@@ -71,8 +79,9 @@ namespace Sam
         class Bush : Obstacle
         {
             public Bush(Vector2 newPos) : base(newPos) 
-            {radius = 56;
-            }
+            {radius = 32;
+            hitPos = new Vector2(position.X + 56, position.Y + 57);
+        }
         }
 
 
