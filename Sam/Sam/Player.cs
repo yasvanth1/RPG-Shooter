@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sam.MacOS;
+using Sam.Desktop;
 
 namespace Sam
 {
@@ -20,9 +20,31 @@ namespace Sam
         private Dir direction = Dir.Down;
         private bool isMoving = false;
         private KeyboardState kStateOld = Keyboard.GetState(); // this stores the previous frames keyboard state.
+        private int radius = 56;
+        private float healthTimer = 0f;
+
 
         public AnimatedSprite anim;
         public AnimatedSprite[] animations = new AnimatedSprite[4];  // creating a array that stores animated sprite objects.
+
+
+
+        public float HealthTimer
+        {
+            get { return healthTimer; }
+            set { healthTimer = value; }
+        }
+
+
+
+        public int Radius
+        {
+            get { return radius; }
+           
+        }
+
+
+
 
 
         public int Health
@@ -64,6 +86,10 @@ namespace Sam
 
             KeyboardState kState = Keyboard.GetState();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (healthTimer > 0)
+            {
+                healthTimer -= dt; // the healthtimer will only count down if its value is greater than 0.
+            }
 
 
             anim = animations[(int)direction]; // this can be used instead of a switch statement 
